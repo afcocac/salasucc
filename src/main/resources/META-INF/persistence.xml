@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.andco_salasucc_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.andco.salasucc.model.SalasHasProgramas</class>
+    <class>com.andco.salasucc.model.GruposProgramas</class>
+    <class>com.andco.salasucc.model.MaterialesAdicionales</class>
+    <class>com.andco.salasucc.model.Salas</class>
+    <class>com.andco.salasucc.model.Usuarios</class>
+    <class>com.andco.salasucc.model.Programas</class>
+    <class>com.andco.salasucc.model.Facultades</class>
+    <class>com.andco.salasucc.model.Reservas</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/salasbd?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="salasucc"/>
+    </properties>
+  </persistence-unit>
+</persistence>

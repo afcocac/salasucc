@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h1>Registro</h1>
+                    <p>Todos los campos son requeridos y deberan contener información valida</p>
+                    <p:messages id="messages" autoUpdate="true" />
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Nombre:"/>
+                        <h:inputText id="nombreInputText" required="true"
+                                     requiredMessage="Por favor ingrese su nombre"
+                                     value="#{registroBean.nombre}"
+                                     validatorMessage="El nombre debe de tener solamente letras">
+                            <f:validateRegex pattern=
+                                             "[a-zA-z]+([ '-][a-zA-Z]+)*" />
+                        </h:inputText>
+                        <h:message for="nombreInputText" style="color:red"/>
+
+                        <h:outputText value="Apellido:"/>
+                        <h:inputText id="apellidoInputText" required="true"
+                                     requiredMessage="Por favor ingrese su apellido"
+                                     value="#{registroBean.apellido}"
+                                     validatorMessage="El apellido debe de tener solamente letras">
+                            <f:validateRegex pattern=
+                                             "[a-zA-z]+([ '-][a-zA-Z]+)*" />
+                        </h:inputText>
+                        <h:message for="apellidoInputText" style="color:red"/>
+                        
+                        <h:outputText value="Correo institucional:"/>
+                        <h:inputText id="correoInputText" required="true"
+                                     requiredMessage="Por favor ingrese su correo"
+                                     value="#{registroBean.correo}"
+                                     validatorMessage="Correo inválido">
+                            <f:validateRegex pattern=
+                                             "[a-zA-Z]+@ucatolica.edu.co" />
+                        </h:inputText>
+                        <h:message for="correoInputText" style="color:red"/>
+                        
+                        <h:outputText value="Contraseña:"/>
+                        <h:inputSecret id="password" required="true"
+                                       requiredMessage="Por favor ingrese la contraseña"
+                                       value="#{registroBean.password}"
+                                       />
+                        <h:message for="password" style="color:red"/>
+
+                        <h:outputText value="Confirmar Contraseña:"/>
+                        <h:inputSecret id="passwordConfirm" required="true"
+                                       requiredMessage="Por favor confirme la contraseña"
+                                       value="#{registroBean.passwordConfirm}"
+                                       />
+                        <h:message for="passwordConfirm" style="color:red"/>
+
+                        <h:outputText value="Programa:"/>
+                        <h:selectOneMenu value="#{registroBean.facultad}">
+                            <f:selectItems value="#{registroBean.listaFacultades}" var="facultad" itemValue="#{facultad.idfacultad}" itemLabel="#{facultad.nombre}"/>
+                        </h:selectOneMenu>
+
+                    </h:panelGrid>
+                    <h:commandButton value="Registrar" action="#{registroBean.registrar}"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

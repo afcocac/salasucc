@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="left">
+                <h:form>
+                    <h:outputLink value="lista.xhtml"> Reservas </h:outputLink> 
+                    <br />
+                    <h:commandLink action="#{nuevaBean.cerrarSesion}" value="Cerrar Sesion"/>
+                </h:form>
+            </ui:define>
+            
+            <ui:define name="content">
+
+                <h:form>
+                    <h1>Nueva Reserva</h1>
+                    <p>Todos los campos son requeridos y deberan contener información valida</p>
+                    <p:messages id="messages" autoUpdate="true" />
+                    <h:panelGrid columns="3" >
+                        <h:outputText value="Número de estudiantes:" />
+                        <h:inputText id="numEstInputText" value="#{nuevaBean.numEstudiantes}" required="true"> 
+                            <f:convertNumber integerOnly="true" />
+                        </h:inputText>
+                        <h:message for="numEstInputText" style="color:red"/>
+
+                        <h:outputText value="Software:"/>
+                        <p:multiSelectListbox id="softwareSelectOneMenu" value="#{nuevaBean.software}" effect="slide" required="true" requiredMessage="Software Requerido" >
+                            <f:selectItems value="#{nuevaBean.gruposPrograma}"/>
+                        </p:multiSelectListbox>
+                        
+                        <h:message for="softwareSelectOneMenu" style="color:red" />
+
+                        <h:outputText value="Fecha:" />
+                        <p:calendar id="fechaCalendar" value="#{nuevaBean.fecha}" pattern="dd/MM/yyyy" required="true" requiredMessage="Fecha Requerida" showOn="button" navigator="true" mindate="#{nuevaBean.hoy}"/>
+                        <h:message for="fechaCalendar" style="color:red" />
+
+                        <h:outputText value="Hora Inicio:" />
+                        <p:calendar id="horaInicio" value="#{nuevaBean.horaInicio}" pattern="HH:mm a" timeOnly="true" required="true" requiredMessage="Hora Requerida" stepMinute="30" minHour="6" maxHour="20"/>
+                        <h:message for="horaInicio" style="color:red" />
+                        
+                        <h:outputText value="Hora Fin:" />
+                        <p:calendar id="horaFin" value="#{nuevaBean.horaFin}" pattern="HH:mm a" timeOnly="true" required="true" requiredMessage="Hora Requerida" stepMinute="30" minHour="8" maxHour="22"/>
+                        <h:message for="horaFin" style="color:red" />
+                        
+                        <h:outputText value="Recurrente:" />
+                        <h:selectBooleanCheckbox value="#{nuevaBean.recurrente}" />
+
+                    </h:panelGrid>
+                    <h:commandButton value="Siguiente" action="#{nuevaBean.siguiente}"/>
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

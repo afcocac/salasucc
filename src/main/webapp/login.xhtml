@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h1>Iniciar Sesión</h1>
+                    <p:messages id="messages" autoUpdate="true" />
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Usuario:"/>
+                        <h:inputText id="usuarioInputText" required="true"
+                                     requiredMessage="Por favor ingrese su usuario"
+                                     value="#{loginBean.usuario}"
+                                     />
+                        <h:message for="usuarioInputText" style="color:red"/>
+
+                        <h:outputText value="Contraseña:"/>
+                        <h:inputSecret id="passwordInputText" required="true"
+                                       requiredMessage="Por favor ingrese su contraseña"
+                                       value="#{loginBean.password}"
+                                       />
+                        <h:message for="passwordInputText" style="color:red"/>
+
+
+                    </h:panelGrid>
+                    <h:commandButton value="Ingresar" action="#{loginBean.login}"/>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

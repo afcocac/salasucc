@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="left">
+                <h:form>
+                    <p:messages id="messages" autoUpdate="true" />
+                    <h:outputLink value="lista.xhtml"> Reservas </h:outputLink> 
+                    <br />
+                    <h:commandLink action="#{listaBean.cerrarSesion}" value="Cerrar Sesión"/>
+                </h:form>
+            </ui:define>
+            
+            <ui:define name="content">
+                <h:form>
+                    <h1>Listas de reserva</h1>
+                    <h:commandButton value="Nueva Reserva" action="nueva"/>
+                    <p>Sus reservas son las siguientes:</p>
+                    <p:dataTable value="#{listaBean.listaReservas}" var="reserva" >
+                        <p:column headerText="Asignatura" width="20%">
+                            <h:outputText value="#{reserva.asignatura}" />
+                        </p:column>
+                        
+                        <p:column headerText="Sala" width="20%">
+                            <h:outputText value="#{reserva.idsala.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Fecha" width="15%">
+                            <h:outputText value="#{reserva.fechaInicio}" >
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Hora Inicio" width="15%">
+                            <h:outputText value="#{reserva.fechaInicio}" >
+                                <f:convertDateTime type="date" pattern="HH:mm a"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Hora Fin" width="15%">
+                            <h:outputText value="#{reserva.fechaFin}" >
+                                <f:convertDateTime type="date" pattern="HH:mm a"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Guia" width="15%">  
+                            <h:commandButton rendered="#{reserva.guia != null}" value="Descargar" action="#{listaBean.descargarGuia(reserva)}"/>  
+                            <h:outputText rendered="#{reserva.guia == null}" value=""/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

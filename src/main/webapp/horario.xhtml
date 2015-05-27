@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="left">
+                <h:form>
+                    <h:outputLink value="lista.xhtml"> Reservas </h:outputLink> 
+                    <br />
+                    <h:commandLink action="#{nuevaBean.cerrarSesion}" value="Cerrar Sesión"/>
+                </h:form>
+            </ui:define>
+            
+            <ui:define name="content">
+                <h:form enctype="multipart/form-data">
+                    <h1>Reserva</h1>
+
+                    <p>Todos los campos son requeridos y deberan contener información valida</p>
+                    <h:panelGrid columns="2">
+
+                        <h:outputText value="Número de estudiantes:" />
+                        <h:outputText value="#{nuevaBean.numEstudiantes}"/>
+
+                        <h:outputText value="Software:" />
+                        <h:outputText value="#{nuevaBean.software}" />
+
+                        <h:outputText value="Fecha:"/>
+                        <h:outputText value="#{nuevaBean.fecha}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                        
+                        <h:outputText value="Hora Inicio:"/>
+                        <h:outputText value="#{nuevaBean.horaInicio}">
+                            <f:convertDateTime type="date" pattern="HH:mm a"/>
+                        </h:outputText>
+                        
+                        <h:outputText value="Hora Fin:"/>
+                        <h:outputText value="#{nuevaBean.horaFin}">
+                            <f:convertDateTime type="date" pattern="HH:mm a"/>
+                        </h:outputText>
+
+                        <h:outputText value="Recurrente:" />
+                        <h:outputText value="#{nuevaBean.recurrente}"/>
+
+                        <h:outputText value="Sala:" />
+                        <h:outputText value="#{nuevaBean.sala}"/>
+
+                        <h:outputText value="Material Adicional:" />
+                        <h:selectOneMenu value="#{nuevaBean.materialAdicional}">
+                            <f:selectItems value="#{nuevaBean.listaMaterialesAdicionales}" var="material" itemValue="#{material.idmaterialAdicional}" itemLabel="#{material.nombre}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputText value="Asignatura:" />
+                        <h:inputText value="#{nuevaBean.asignatura}" required="true"/>
+
+                        <h:outputText value="Grupo:" />
+                        <h:inputText value="#{nuevaBean.grupo}" required="true"/>
+
+                        <h:outputText value="Franja:" />
+                        <h:selectOneRadio value="#{nuevaBean.franja}" required="true">
+                            <f:selectItem itemValue="true" itemLabel="Diurna"/>
+                            <f:selectItem itemValue="false" itemLabel="Nocturna"/>
+                        </h:selectOneRadio>
+
+                        <h:outputText value="Guia:" />
+                        <h:inputFile value="#{nuevaBean.guia}"/>
+
+                    </h:panelGrid>
+                    <h:commandButton value="Reservar" action="#{nuevaBean.reservar}"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
